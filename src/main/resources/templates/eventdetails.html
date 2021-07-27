@@ -1,0 +1,173 @@
+
+
+<!-- <h3 class="pt-1">Event Details</h3>
+
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="dashboard">Home</a></li>
+		<li class="breadcrumb-item">View Event Details</li>
+		<li class="breadcrumb-item active" aria-current="page">Event Details</li>
+	</ol>
+</nav> -->
+
+<div class="col-sm-12 post_msg starbg" id="competition_form_div">
+	
+	<form enctype="multipart/form-data" action=""
+		th:action="@{/artnook/saveEventDetails}" th:object="${eventDetailsDto}"
+		method="post" class="formdetails" id="eventDetails_form">
+
+
+		<div class="card">
+			<div class="card-body">
+			<input type="hidden" th:field="*{id}" th:value="${id}"
+								id="idDetails">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="email" class="required_lbl">Event Name</label> <input type="text" class="form-control"
+								id="eventName" placeholder="Enter Event Name"
+								th:field="*{eventName}">
+						</div>
+					</div>
+					
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="datefrom" class="required_lbl">Available From Date</label> <input type="text" class="form-control datetimepicker"
+								id="availableFrom" placeholder="EnterAvailable From Date" name="datefrom"
+								th:field="*{availableFrom}">
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="dateto" class="required_lbl">Available To Date</label> <input type="text" class="form-control  datetimepicker"
+								id="availableTo" placeholder="Available To Date" name="dateto"
+								th:field="*{availableTo}">
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="Specialisation" class="required_lbl">Is Active</label> <select
+								class="form-control" th:field="*{isActive}" required>
+								<option value="">Select</option>
+								<option th:value="1" th:text="Active"></option>
+								<option th:value="0" th:text="InActive"></option>
+							</select>
+						</div>
+					</div>
+					<div class="col-sm-8">
+						<div class="form-group">
+							<label for="email" class="required_lbl">Event Description</label> <textarea class="form-control"
+								id="eventDescription"
+								th:field="*{eventDescription}"></textarea>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		
+		   <div class="card-footer bg-white">
+		     <div class=" mt-2 mb-2 ">
+			   <div class="text-center">
+			      <input type="submit" class="button btn btn-info comment_btn " value="Save">
+			   </div>
+			</div>
+		   </div>
+		</div>
+		
+		
+		
+	</form>
+</div>
+
+
+
+<div class="modal fade" id="contactModal" tabindex="-1" role="dialog"
+	aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Message</h5>
+			</div>
+			<div class="modal-body">Your Information Save Successfully,
+				Thank You!!</div>
+			<div class="modal-footer">
+				<button class="btn btn-primary" type="button" id="closeButton"
+					data-dismiss="modal">Close</button>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+	
+
+	//Ajax call to Save form details
+    $('#eventDetails_form').on('submit',(function(e) {
+        e.preventDefault();
+       var form = $('#eventDetails_form')[0];
+       
+	        var formData = new FormData(form);
+	       
+        $.ajax({
+            type:'POST',
+            url: $(this).attr('action'),
+            data:formData,
+            cache:false,
+            contentType: false,
+            processData: false,
+            success:function(data){
+            	
+            	//clear form data after form submit and once details  are saved and open Modal to show appropriate msg
+            	
+            	//$("input,select").val("");
+         
+            	$('.modal-body').html('Event Details Save successfully, Thank you.')
+            	$('#contactModal').modal('show');
+            	  
+            	$("#closeButton").click(function(){
+                	
+            	
+            
+            		 $.ajax({
+			              url : "/artnook/newEventDetails",
+			              async : true,
+			              success : function(data) {
+			            	  $('div').removeClass('modal-backdrop fade show');
+			                   $('.container-fluid').html(data);
+			              }
+			            });
+           		}); 
+           
+           },
+           error: function(data){
+           	//window.location.href=window.location.origin + '/artnook/newContact';
+        
+           	$('.modal-body').html('Event Details Save successfully, Thank you.')
+           	$('#contactModal').modal('show');
+            
+           }
+        });
+	        
+	       
+    }));
+	
+</script>
+
+<script>
+
+$(document).ready(function(){
+
+		$(function(){
+			$('.datetimepicker').appendDtpicker({
+				
+			"amPmInTimeList": true,
+			"closeButton": false,
+			"closeOnSelected": true
+			
+			});
+		});
+});
+</script>
+

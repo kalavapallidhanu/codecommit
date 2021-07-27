@@ -1,0 +1,85 @@
+
+<h3 class="pt-1">Announcement</h3>
+
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="dashboard">Home</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Announcement </li>
+	</ol>
+</nav>
+
+
+<div class="row mt-3">
+	<!-- slider 1  ANNOUNCEMENT-->
+	<div class="col-xl-8 col-lg-7">
+		<div class="card shadow mb-4">
+			<!-- Card Header - Dropdown -->
+			<div
+				class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+				<h6 class="m-0 font-weight-bold text-primary">Announcement</h6>
+			</div>
+			<!-- Card Body -->
+			<div class="card-body">
+				<h1 th:if="${!#strings.isEmpty(annViewOne.title)}"
+					th:utext="${annViewOne.title}"></h1>
+				<div class="headings_date bold"
+					th:if="${!#strings.isEmpty(annViewOne.subTitle)}"
+					th:utext="${annViewOne.subTitle}"></div>
+				<p th:utext="${annViewOne.readMoreContent}"
+					th:if="${!#strings.isEmpty(annViewOne.readMoreContent)}"
+					class="w-100"></p>
+
+			</div>
+		</div>
+	</div>
+	<!-- slider 2 -->
+	<div class="col-xl-4 col-lg-5">
+		<div class="card shadow mb-4">
+			<!-- Card Header - Dropdown -->
+			<div
+				class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+				<h6 class="m-0 font-weight-bold text-primary">View All
+					Announcement</h6>
+			</div>
+			<!-- Card Body -->
+			<div class="card-body">
+				<div class="story_list" th:if="${ann!=null && ann.size()>0 }"
+					th:each="an: ${ann}">
+					<h4 class="title" th:if="${!#strings.isEmpty(an.title)}"
+						th:utext="${an.title}"></h4>
+					<span class="subtitle bold"
+						th:if="${!#strings.isEmpty(an.subTitle)}"
+						th:utext="${an.subTitle}">&nbsp;</span> &nbsp;<span class="date"></span>
+					<br /><!--  <a href="javascript:void(0)"
+						th:id="|/artnook/ann-read/${an.id}|"
+						th:if="${!#strings.isEmpty(an.title)}"
+						class="readmore artnook-link"><u>Read More</u></a> -->
+						
+						<a href="#page-top"
+						th:id="|/artnook/ann-read/${an.id}|"
+						th:if="${!#strings.isEmpty(an.title)}"
+						class="readmore artnook-link"><u>Read More</u></a>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+<script>
+	$(document).ready(function(event) {
+
+		$(".ckeditor-html5-video video").prop("controls", true);
+	});
+	
+	$(document).on('click', 'a.readmore', function(e) {
+	    var $anchor = $(this);
+	    $('html, body').stop().animate({
+	      scrollTop: ($($anchor.attr('href')).offset().top)
+	    }, 500, 'easeInOutExpo');
+	    e.preventDefault();
+	  });
+</script>

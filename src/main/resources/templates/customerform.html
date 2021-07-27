@@ -1,0 +1,409 @@
+
+
+<h3 class="pt-1">Contact Details</h3>
+
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="dashboard">Home</a></li>
+		<li class="breadcrumb-item">View Contact Details</li>
+		<li class="breadcrumb-item active" aria-current="page">Contact Details</li>
+	</ol>
+</nav>
+
+<div class="col-sm-12 post_msg starbg" id="user_form_div">
+	<div class="top_nav mb-2">
+		<div class="noti">
+			<img src="/artnook/icons/infor.png">
+			<p class="notification_message">Some fields are editable only by
+				the profile owner</p>
+		</div>
+	</div>
+	<form enctype="multipart/form-data" action=""
+		th:action="@{/artnook/saveContact}" th:object="${contact}"
+		method="post" class="formdetails" id="user_form">
+
+
+		<div class="card">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="pwd" class="required_lbl">ID</label> <input
+								type="text" id="contactId" class="form-control" th:field="*{id}"
+								placeholder="Enter ID" required>
+							<!-- <input type = "text" id = "updateStatus"  th:field="*{updateStatus}"> -->
+						</div>
+					</div>
+					
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="pwd" class="required_lbl">First Name</label> <input
+								type="text" class="form-control" id="firstName"
+								placeholder="Enter First Name" th:field="*{firstName}" required>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="email" class="required_lbl">Middle Name</label> <input type="text" class="form-control"
+								id="lastNameDisplayName" placeholder="Enter Middle Name"
+								th:field="*{middleName}" required>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="email" class="required_lbl">Last Name</label> <input
+								type="text" class="form-control" id="lastName"
+								placeholder="Enter Last Name" th:field="*{lastName}" required>
+						</div>
+					</div>
+					
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="Specialisation" class="required_lbl">Gender</label> <select
+								class="form-control" th:field="*{gender}" required>
+								<option value="">Select</option>
+								<option th:value="Male" th:text="Male"></option>
+								<option th:value="Female" th:text="Female"></option>
+								<option th:value="Others" th:text="Others"></option>
+							</select>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="dob" class="required_lbl">Date of Birth</label> <input
+								type="date" class="form-control" id="dob" th:field="*{dob}"
+								placeholder="Enter Date of Birth" name="" required>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="pwd" class="required_lbl">Blood Group</label> <input type="text" class="form-control"
+								id="bloodGroup" placeholder="Enter Blood group"
+								th:field="*{bloodGroup}" required>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="country_code" class="required_lbl">Country Code</label>
+							<input type="text" class="form-control" id="country_code"  placeholder="Enter Country Code (+91)"
+								   th:field="*{countryCode}" required maxlength="3" max="3">
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="mobile_num" class="required_lbl">Mobile
+								Number</label> <input type="text" class="form-control" id="mobile_num"
+								pattern="^\d{10}$" placeholder="Enter Mobile No"
+								th:field="*{mobileNo}" required>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="Email" class="required_lbl">Email</label> <input
+								type="text" class="form-control" id="emailId"
+								placeholder="Enter Mail Id" th:field="*{mailId}" required>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+			</div>
+		
+
+		<div class="card mt-2" id="">
+			<div class="card-body">
+				<div class="row">
+				<div class="col-sm-4">
+						<div class="form-group">
+							<label for="pwd" class="required_lbl">Class</label> <input type="text" class="form-control"
+								id="className" placeholder="Enter Class Name"
+								th:field="*{className}" required>
+						</div>
+					</div>
+					
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="pwd" class="required_lbl">Division</label> <input type="text" class="form-control"
+								id="divisionName" placeholder="Enter Division"
+								th:field="*{divisionName}" required>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="pwd" class="required_lbl">Branch</label> <input type="text" class="form-control"
+								id="branch" placeholder="Enter Branch Name"
+								th:field="*{branch}" required>
+						</div>
+					</div>
+					
+					
+					
+				</div>
+			</div>
+		</div>
+		
+
+
+	
+		<div class="card mt-2" id="">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="Specialisation" class="required_lbl">Role</label> <select
+								class="form-control" th:field="*{userGroup}" id="userGroupName"
+								required>
+								<option value="">Select</option>
+								<option th:each="user : ${userType}" th:value="${user.value}"
+									th:text="${user.label}">1</option>
+							</select> <input type="hidden" id="groupName" th:field="*{userGroupName}"
+							
+								required>
+								<input type="hidden" id="groupID" th:field="*{userGroup}"
+							
+								required>
+							<!-- 	<input type = "text" id = "groupID" th:field="*{userGroupID}">   -->
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="Specialisation" class="required_lbl">Status</label> <select
+								class="form-control" th:field="*{isActive}" required>
+								<option value="">Select</option>
+								<option th:value="1" th:text="Active"></option>
+								<option th:value="0" th:text="InActive"></option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class=" mt-3 mb-3 p-2">
+		   <div class="text-center">
+		      <input type="submit" class="button btn btn-info comment_btn " value="Save">
+		   </div>
+		</div>
+		
+	</form>
+</div>
+
+
+
+<div class="modal fade" id="contactModal" tabindex="-1" role="dialog"
+	aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Message</h5>
+			</div>
+			<div class="modal-body">Your Information Save Successfully,
+				Thank You!!</div>
+			<div class="modal-footer">
+				<button class="btn btn-primary" type="button" id="closeButton"
+					data-dismiss="modal">Close</button>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+	$(document)
+			.ready(
+					function() {
+						$("#contactId")
+								.change(
+										function() {
+											var id = $('#contactId').val()
+											$
+													.ajax({
+														url : "/artnook/fetchContactDetails/"
+																+ id,
+														success : function(data) {
+															$(".errorMsg")
+																	.hide();
+															if (data === "Exist") {
+																$("#contactId")
+																		.after(
+																				'<span class="errorMsg" style="color: red;"> ID Already Exist.</span>');
+																$('#contactId')
+																		.val("");
+															} else {
+																$("#contactId")
+																		.after(
+																				'');
+															}
+														}
+													});
+										});
+						$('#emailId')
+								.on(
+										'change',
+										function() {
+											$(".errorMsg").hide();
+											var hasError = false;
+											var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+
+											var emailaddressVal = $("#emailId")
+													.val();
+											if (emailaddressVal == '') {
+												$("#emailId")
+														.after(
+																'<span class="errorMsg" style="color: red;">Please enter your email address.</span>');
+												hasError = true;
+											}
+
+											else if (!emailReg
+													.test(emailaddressVal)) {
+												$("#emailId")
+														.after(
+																'<span class="errorMsg" style="color: red;">Enter a valid email address.</span>');
+												hasError = true;
+											}
+
+											if (hasError == true) {
+												return false;
+											}
+											$
+													.ajax({
+														url : "/artnook/fetchMailDetails/"
+																+ emailaddressVal,
+														success : function(data) {
+
+															if (data === "Exist") {
+																$("#emailId")
+																		.after(
+																				'<span class="errorMsg" style="color: red;" >Mail Id Already Exist.</span>');
+																$('#emailId')
+																		.val("");
+															} else {
+
+															}
+														}
+													});
+										});
+
+						$('#userGroupName').on('change', function() {
+							var id = $('#userGroupName').val();
+
+							$.ajax({
+								url : "/artnook/fetchGroupName/" + id,
+								success : function(data) {
+
+									$("#groupName").val(data.label);
+									$("#groupID").val(data.value);
+								}
+							});
+						});
+						if ($("#contactId").val() != "") {
+							$("#contactId").attr('readonly', true);
+							var falg = 1;
+							$("#updateStatus").val(falg);
+						}
+
+						if ($('#userGroupName').val() != "")
+
+						{
+							var id = $('#userGroupName').val()
+							$.ajax({
+								url : "/artnook/fetchGroupName/" + id,
+								success : function(data) {
+									$("#groupName").val(data.label);
+									
+								}
+							});
+						}
+
+						
+
+					});
+	if ($("#userGroupName").val() != '') {
+		$("#userGroupName").attr('disabled', true);
+	}
+
+	if ($("#emailId").val() != "") {
+		$("#emailId").attr('readonly', true);
+
+	}
+
+	if ($("#contactId").val() != "") {
+		$("#contactId").attr('readonly', true);
+		var falg = 1;
+		$("#updateStatus").val(falg);
+	}
+
+	//Ajax call to Save form details
+    $('#user_form').on('submit',(function(e) {
+        e.preventDefault();
+       var form = $('#user_form')[0];
+       
+	        var formData = new FormData(form);
+	       
+	       
+        $.ajax({
+            type:'POST',
+            url: $(this).attr('action'),
+            data:formData,
+            cache:false,
+            contentType: false,
+            processData: false,
+            success:function(data){
+            	
+            	//clear form data after form submit and once details  are saved and open Modal to show appropriate msg
+            	
+            	//$("input,select").val("");
+         
+            	$('.modal-body').html('User Details Save successfully, thank you.')
+            	$('#contactModal').modal('show');
+            	  
+            	$("#closeButton").click(function(){
+                	
+            		//$('#main-container').html(data);
+            		/*  $.ajax({
+			              url : "viewAllContact",
+			              async : true,
+			              success : function(data) {
+			            	  $('div').removeClass('modal-backdrop fade show');
+			                   $('.container-fluid').html(data);
+			              }
+			            });
+            		}); 
+            	
+            
+            },
+            error: function(data){
+            	//window.location.href=window.location.origin + '/artnook/newContact';
+         
+            	$('.modal-body').html('Unable to Save User Details, Please try later.')
+            	$('#contactModal').modal('show');
+             
+            } */
+            
+            
+            		 $.ajax({
+			              url : "/artnook/newContact",
+			              async : true,
+			              success : function(data) {
+			            	  $('div').removeClass('modal-backdrop fade show');
+			                   $('.container-fluid').html(data);
+			              }
+			            });
+           		}); 
+           
+           },
+           error: function(data){
+           	//window.location.href=window.location.origin + '/artnook/newContact';
+        
+           	$('.modal-body').html('User Details Save successfully, thank you.')
+           	$('#contactModal').modal('show');
+            
+           }
+        });
+	        
+	       
+    }));
+	
+</script>
+

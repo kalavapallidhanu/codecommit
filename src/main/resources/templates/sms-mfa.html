@@ -1,0 +1,51 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head xmlns:th="http://www.thymeleaf.org">
+<title>Artnook School</title>
+<link rel="shortcut icon" type="image/png" href="/artnook/img/favicon.png" />
+</head>
+<body>
+
+
+
+
+	<div class="form-group form_row" th:if="${param.error}"
+		style="color: red">Invalid Credentials</div>
+
+	<div class="form-group form_row" th:text="${error}" style="color: red"></div>
+	<br />
+	<h3 align="center">
+		<u>Verification</u>
+	</h3>
+	<br />
+
+	<form name="changepasswordform" th:action="@{cognito-sms-mfa}"
+		th:object="${cognitoData}" method="post">
+		<input type="hidden" name="_csrf"
+			value="5daf737e-6285-46bf-8c03-157c321331ed" /> <input type="hidden"
+			th:field="*{cognitoSession}" th:value="${cognitoData.cognitoSession}" />
+		<input type="hidden" th:field="*{userName}"
+			th:value="${cognitoData.userName}" />
+		<table align="center" style="padding: 10px; width: 60%;">
+			<tbody>
+				<tr>
+					<td><label class="label-customizable">Verification
+							Code</label></td>
+					<td><input id="sms_code"
+						class="form-control inputField-customizable" type="text"
+						th:field="*{smsMfaCode}" required></td>
+					<td><button name="reset_password" type="submit"
+							style="background-color: #ff5300"
+							class="btn btn-primary submitButton-customizable">Send</button></td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+	<p align="center" style="color: red" th:text="${error}"></p>
+
+
+</body>
+
+</html>

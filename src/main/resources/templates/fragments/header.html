@@ -1,0 +1,166 @@
+<style>
+	.artLogo{
+		width:5.5rem !important;
+	}
+	.artLogoMobile{
+		display:none;
+	}
+	@media(max-width:768px){
+		.artLogo{
+			display:none;
+		}
+		.artLogoMobile{
+			display:inline;
+			width:6rem !important;
+		}
+	}
+</style>
+<header>
+ <input type="hidden" th:value="${session.user.userGroup}" id="userGroup">
+  <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top" style="height:4.375rem;">
+     
+   <!-- Sidebar Toggle (Topbar) -->
+   <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle ">
+     <i class="fa fa-bars" id="bars"></i>
+   </button>
+   
+   <a class="d-flex align-items-center justify-content-center" href="dashboard">
+  <div th:class="sidebar-brand-icon">
+				<img th:if="${session.user!=null}" th:src="${session.user.logo}" class="artLogo"/>  
+				<img th:if="${session.user!=null}" th:src="${session.user.logo}" class="artLogoMobile"/>  
+	</div>
+ 
+ </a>
+
+   <!-- Topbar Navbar -->
+   <ul class="navbar-nav ml-auto">
+
+    
+     <div class="topbar-divider d-none d-sm-block"></div>
+
+     <!-- Nav Item - User Information -->
+     <li class="nav-item dropdown no-arrow">
+       <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+         <span th:utext="${session.user.masterContactDto.contactFirstName}"
+						th:if="${!#strings.isEmpty(session.user.masterContactDto.contactFirstName)}" class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
+         <img class="img-profile rounded-circle" th:if="${session.user.masterContactDto!=null && session.user.masterContactDto.imageCode!=null}" id="sm-profile-picture" th:src="${session.user.masterContactDto.imageCode}">
+          <img class="img-profile rounded-circle" th:if="${session.user.masterContactDto==null || session.user.masterContactDto.imageCode==null}" src="/artnook/img/download.png" alt="Edit Profile" >     
+       </a>
+       <!-- Dropdown - User Information -->
+        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+         <a  href="javascript:void(0)"  id="/artnook/profileView" class="dropdown-item artnook-link">
+           <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+           Profile
+         </a>
+          
+        
+       <div class="dropdown-divider"></div>
+      
+         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+           <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+           Logout
+         </a>
+          <div class="dropdown-divider"></div>
+           <a class="dropdown-item" href="#" data-toggle="" data-target="">
+          
+            
+      <span th:if="${!#strings.isEmpty(session.user.lastLogin)}"
+                  th:utext="${session.user.lastLogin}">&nbsp;</span>
+  
+         </a>
+       
+                            </div>
+     </li>
+
+   </ul>
+
+ </nav>
+ <!-- End of Topbar -->
+   <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">X</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="logout">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+
+</header>
+
+
+<script>
+// Toggle the side navigation
+$("#sidebarToggle, #sidebarToggleTop").on('click', function(e) {
+	 
+  $("body").toggleClass("sidebar-toggled");
+  $(".sidebarr").toggleClass("toggled");
+  if ($(".sidebarr").hasClass("toggled")) {
+    $('.sidebarr .collapse').collapse('hide');
+    
+  };
+});
+
+
+$(document).ready(function(){
+    /* $('.submenu').each(function(){
+    	alert();
+        var count_li=0; 
+        var i=1;
+        
+        $('li.submenuitem').each(function(){
+            count_li++;
+            alert(count_li)
+            if(count_li > 3 && i==1){
+            	
+               $(document.body).append('<ul class="submenu" id="submenu_"'+i'></ul>');
+               $("submenu_"+i).append($(this).nextUntil($(this).last()).andSelf());
+               i++;
+            }
+         });
+        
+    }); */
+    
+   
+
+/* $("li.submenuitem").each(function() {
+	subItemText = $(this).find('span').text();
+	   console.log((subItemText).trim());
+	   
+	   if(subItemText == "") {
+		   console.log("aaaaa");
+		   $(this).hide();
+	   }
+	   else{
+		   console.log("bbbbb");
+		   $(this).show();
+	   }
+	}); */
+	
+	
+	
+		$("li.submenuitem").each(function() {
+			var subItemCount= $("li.submenuitem");
+			var subItemText = $(this).find('span').text(); 
+			   if(subItemText == "") {
+				   $(this).hide();
+			   }
+			   else{
+				   subItemCount = subItemCount.length;
+				   //alert("subItemCount" + subItemCount);
+				   $(this).show();
+			   }
+			   
+	  }); 
+});
+</script>

@@ -1,0 +1,48 @@
+<ul class="carousel-indicators">
+	<th:block th:each="be,stat:${bes}">
+		<li data-target="#Slider_on_widgets_birthday_events"
+			th:data-slide-to="${stat.index}" th:if="${stat.index==0}"
+			class="active"></li>
+		<li data-target="#Slider_on_widgets_birthday_events"
+			th:data-slide-to="${stat.index}" th:if="${stat.index!=0}"></li>
+	</th:block>
+</ul>
+<div class="carousel-inner">
+	<th:block th:each="be,stat:${bes}">
+		<div th:class="|carousel-item ${stat.index==0?'active':''}|">
+			<div class="card_flex">
+				<div class="headings_date" th:if="${!#strings.isEmpty(be.title)}">
+					<h2 th:utext="${be.title}">&nbsp;</h2>
+					<span th:if="${!#strings.isEmpty(be.subTitle)}"
+						th:utext="${be.subTitle}">&nbsp;</span>
+				</div>
+			</div>
+			 <p th:if="${!#strings.isEmpty(be.slipContent)}" th:utext="${be.slipContent}"></p> 
+
+			
+			<p class="takesurvey read_more_txt"
+				th:if="${!#strings.isEmpty(be.title)}">
+				Click here to <a href="javascript:void(0)"
+					class="readmore artnook-link" th:id="|bes-read/${be.id}|">Read
+					More</a>
+			</p>
+			<hr />
+		</div>
+	</th:block>
+</div>
+<a class="carousel-control-prev"
+	href="#Slider_on_widgets_birthday_events" data-slide="prev">
+	<span class="carousel-control-prev-icon"></span>
+</a>
+<a class="carousel-control-next"
+	href="#Slider_on_widgets_birthday_events" data-slide="next">
+	<span class="carousel-control-next-icon"></span>
+</a>
+
+<script>
+
+$( document ).ready(function(event) {
+	
+    $(".ckeditor-html5-video video").prop("controls",true); 
+});
+</script>

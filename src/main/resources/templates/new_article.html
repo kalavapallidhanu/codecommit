@@ -1,0 +1,469 @@
+
+
+<h3 class="pt-1">Article</h3>
+
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="dashboard">Home</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Article</li>
+	</ol>
+</nav>
+
+
+<div class="row mt-3">
+	<!-- slider 1 -->
+	<div class="col-xl-8 col-lg-7">
+		<div class="card shadow mb-4">
+			<!-- Card Header - Dropdown -->
+			<div
+				class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+				<h6 class="m-0 font-weight-bold text-primary">Save Article
+					Details</h6>
+			</div>
+			<!-- Card Body -->
+			<div class="card-body saveArticleBlock">
+				<div class="">
+					<form action="#" th:action="@{/artnook/saveArticle}"
+						th:object="${article}" method="post" id="saveArticle">
+						<div class="new_acticle">
+							<input type="hidden" th:field="*{id}" th:value="${id}"
+								id="idDetails">
+							<div class="form-row">
+								<div class="form-group col-md-6">
+									<!-- <label for="exampleFormControlSelect1">Selection section</label> -->
+									<select class="form-control" th:field="*{category}"
+										id="announcementSelection">
+										<!-- <option >Selection section</option> -->
+										<option th:each="cat : ${categories}" th:value="${cat.id}"
+											th:text="${cat.title}">1</option>
+									</select>
+								</div>
+							</div>
+							<h5>Content</h5>
+							<div class="form-group">
+								<!-- <label>Enter Article Title</label> -->
+								<input type="text" th:field="*{title}" class="form-control"
+									placeholder="Enter Article Title" th:value="${article.title}">
+								<div class="small_description">
+									<span>Help text for this field</span> <span>256
+										Characters</span>
+								</div>
+							</div>
+							<div id="other_Annoucement">
+								<div class="form-group">
+									<!-- <label>Email address</label> -->
+									<input type="text" th:field="*{subTitle}" class="form-control"
+										placeholder="Enter Sub-Title">
+									<div class="small_description">
+										<span>Help text for this field</span> <span>256
+											Characters</span>
+									</div>
+								</div>
+								<div class="form-group" id="bodyContent_Details">
+									<h5>
+										<label>Enter Slip Content</label>
+									</h5>
+									<textarea class="form-control" rows="4"
+										th:field="*{slipContent}" placeholder="Slip content"
+										id="slipContentBody"></textarea>
+									<div class="slip_description">
+										<span></span> <span>2000 Characters</span>
+									</div>
+								</div>
+								<div class="form-group" id="bodyContent_Details">
+									<h5>
+										<label>Enter Read More Page Content</label>
+									</h5>
+									<textarea class="form-control" rows="4"
+										th:field="*{readMoreContent}" placeholder="Read more content"
+										id="bodyContent"></textarea>
+									<div class="small_description">
+										<span></span> <span>2000 Characters</span>
+									</div>
+								</div>
+							</div>
+							<div id="bannerDetails">
+								<!-- <div class="form-group">
+                  <label>Enter Article Title</label>
+                  <input type="text" th:field="*{title}" class="form-control"
+                  	placeholder="Enter Article Title">
+                  <div class="small_description">
+                  	<span>Help text for this field</span> <span>256
+                  		Characters</span>
+                  </div>
+                  </div> -->
+								<div class="">
+									<label>Add Image URL</label>
+								</div>
+								<div class="form-row media_row">
+									<div class="form-group col">
+										<input type="text" class="form-control" th:field="*{webImage}"
+											placeholder="Add Desktop Bannner URL">
+									</div>
+									<div class="form-group col-md-1"></div>
+									<div class="form-group col">
+										<input type="text" class="form-control"
+											th:field="*{mobileImage}" placeholder="Add Mobile Banner URL">
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label><input type="radio" th:field="*{active}"
+									name="Active" value="1" id="activeDetails">Active</label> <label><input
+									type="radio" th:field="*{active}" name="Active" value="0">
+									In Active</label>
+							</div>
+							<div class="form-group col">
+								<h5>
+									<label>Enter Display Order</label>
+								</h5>
+								<input type="number" min="1" class="form-control" value="1"
+									th:field="*{displayOrder}" placeholder="Add DisplayOrder"
+									required>
+							</div>
+							<!--  <input name="submit" type="submit" value="Submit" id="submit" /> -->
+							<div class="new_acticle_submit pt-2 pb-2 text-center">
+								<button type="btn" class="btn btn-info">Close</button>
+								<input type="submit" class="btn btn-info" value="Publish"
+									placeholder="Publish">
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- slider 2 -->
+	<div class="col-xl-4 col-lg-5">
+		<div class="card shadow mb-4">
+			<!-- Card Header - Dropdown -->
+			<div
+				class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+				<h6 class="m-0 font-weight-bold text-primary">Upload
+											Picture or a Video</h6>
+			</div>
+			<!-- Card Body -->
+			<div class="card-body fileuploadBLock">
+
+				<form action="#" th:action="@{/artnook/uploadDetails}"
+					method="post" enctype="multipart/form-data" id="fileUploadForm">
+					<div class="new_acticle">
+						<div class="form-group">
+							<div class="form-row">
+								<div class="col-md-8">
+									<div class="custom-file">
+										<input type="file" name="file" class="custom-file-input"
+											id="file-upload" multiple required> <label
+											class="custom-file-label" for="customFile"></label>
+										<div class="small_description">
+											<span>Supported formats are jpg, png, mpg, avi </span>
+										</div>
+										<p id="error1" style="display: none; color: #FF0000;">
+											Invalid File Format! Image Format Must Be JPG, JPEG, PNG or
+											GIF or MP4.</p>
+										<p id="error2" style="display: none; color: #FF0000;">
+											Maximum File Size Limit is 200MB.</p>
+										<p id="error3" style="display: none; color: #FF0000;">
+											File name Already Exist.</p>
+										<p th:if="${!#strings.isEmpty(fileName)}"
+											th:utext="'https://kancor-media.s3.ap-south-1.amazonaws.com/'+${fileName}"></p>
+										<p th:if="${!#strings.isEmpty(fileExist)}"
+											th:utext="${fileExist}"></p>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<input name="submit" type="submit" class="btn btn-info"
+										value="Upload" id="btnSubmit" />
+								</div>
+							</div>
+						</div>
+						<p id="file_name"></p>
+						<p>
+							<span id="result"></span>
+						</p>
+					</div>
+				</form>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- Logout Modal-->
+	<div class="modal fade" id="thankyou" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Message</h5>
+				</div>
+				<div class="modal-body">Your Information Updated Successfully,
+					Thank You!!</div>
+				<div class="modal-footer">
+					<button class="btn btn-primary" type="button" id="closeButton"
+						data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	`
+
+<script type="text/javascript">
+	window.onload = function() {
+
+	};
+	//To check active radio button on page load
+
+	var id = $('#idDetails').val();
+	if (id == "") {
+		$("#activeDetails").prop("checked", true);
+	}
+
+	CKEDITOR.replace('bodyContent');
+	CKEDITOR.replace('slipContent');
+
+	function openModal() {
+
+		$('#myModal').modal('show');
+		var desc = CKEDITOR.instances.bodyContent.getData();
+		$("#showText").html(desc);
+
+	}
+</script>
+<script type="text/javascript">
+	//Image and video validation before file upload
+	$('#btnSubmit').prop("disabled", true);
+	var a = 0;
+	$('#file-upload').bind(
+			'change',
+			function() {
+				if ($('#btnSubmit').attr('disabled', false)) {
+					$('#btnSubmit').attr('disabled', true);
+				}
+				var ext = $('#file-upload').val().split('.').pop()
+						.toLowerCase();
+				if ($.inArray(ext,
+						[ 'gif', 'png', 'jpg', 'jpeg', 'mp4', 'avi' ]) == -1) {
+					$('#error1').slideDown("slow");
+					$('#error2').slideUp("slow");
+					a = 0;
+				} else {
+					var picsize = (this.files[0].size);
+
+					if (picsize > 200000000) {
+						$('#error2').slideDown("slow");
+						a = 0;
+					} else {
+						a = 1;
+						$('#error2').slideUp("slow");
+					}
+					$('#error1').slideUp("slow");
+					if (a == 1) {
+						$('#btnSubmit').attr('disabled', false);
+						$('.new_acticle').addClass('active');
+						var file = $(this)[0].files[0].name;
+						$('#file_name').text(file);
+					}
+				}
+			});
+
+	$(document)
+			.ready(
+					function() {
+						//initially banner detail is hidden
+						$("#bannerDetails").hide();
+
+						//hide and Show div based on banner selection form dropdown
+						$('#announcementSelection').on('change', function() {
+
+							if (this.value == '1')
+
+							{
+								$("#bannerDetails").show();
+								$("#other_Annoucement").hide();
+							} else {
+								$("#other_Annoucement").show();
+								$("#bannerDetails").hide();
+							}
+						});
+
+						if ($('#announcementSelection').val() == '1')
+
+						{
+							$("#bannerDetails").show();
+							$("#other_Annoucement").hide();
+						} else {
+							$("#other_Annoucement").show();
+							$("#bannerDetails").hide();
+						}
+
+						//Ajax call to Save form details
+						$('#saveArticle')
+								.on(
+										'submit',
+										(function(e) {
+											e.preventDefault();
+											// var form = $('#saveArticle')[0];
+											CKEDITOR.instances.bodyContent
+													.updateElement();
+											CKEDITOR.instances.slipContentBody
+													.updateElement();
+											var idCheck = $("#idDetails").val();
+											if (idCheck === "")
+
+											{
+												var form = $('#saveArticle')[0];
+												/* alert("save") */
+												var formData = new FormData(
+														form);
+
+												//formData.append('content', CKEDITOR.instances['bodyContent'].getData());
+												//formData.append('slipContent', CKEDITOR.instances['slipContentBody'].getData());
+
+											} else {/* alert("update")  */
+												var form = $('#saveArticle')[0];
+
+												var formData = new FormData(
+														form);
+												//var content=CKEDITOR.instances['bodyContent'].getData();
+												//alert(content);
+												//var slipContent=CKEDITOR.instances['slipContentBody'].getData();
+												//CKEDITOR.instances.bodyContent.setData('');
+												//CKEDITOR.instances.slipContentBody.setData('');
+												//formData.append('content', content);
+												//formData.append('slipContent',slipContent);
+
+											}
+											 $.ajax({
+									   	            type:'POST',
+									   	            url: $(this).attr('action'),
+									   	            data:formData,
+									   	            cache:false,
+									   	            contentType: false,
+									   	            processData: false,
+									   	            success:function(data){
+									   	            	
+									   	            	//clear form data after form submit and once details  are saved and open Modal to show appropriate msg
+									   	            	/* $("input[type=text],input[type=number],textarea").val(""); */
+									   	            	//$("small_Content").prop('checked',true);
+									   	            	/* CKEDITOR.instances.bodyContent.setData('');
+									   	            	CKEDITOR.instances.slipContentBody.setData(''); */
+									   	            	$('.modal-body').html('Your Article Save successfully, thank you.')
+									   	            	$('#thankyou').modal('show');
+									   	         	$("#closeButton").click(function(){
+									   	      		 $.ajax({
+									   	           url : "/artnook/article",
+									   	           async : true,
+									   	           success : function(data) {
+									   	         	  $('div').removeClass('modal-backdrop fade show');
+									   	                $('.container-fluid').html(data);
+									   	                
+									   	           }
+									   	         });
+									   	           
+									   	      		}); 
+									   	            	
+									   	            },
+														error : function(data) {
+															$('.modal-body')
+																	.html(
+																			'Unable to Save Article, Please try later.')
+															$('#thankyou')
+																	.modal(
+																			'show');
+															console.log(data);
+														}
+													});
+										}));
+
+						//Ajax call to upload file details and append the url link as a list   
+						$("#btnSubmit")
+								.click(
+										function(event) {
+
+											//stop submit the form, we will post it manually.
+											event.preventDefault();
+
+											// Get form
+											var form = $('#fileUploadForm')[0];
+
+											// Create an FormData object 
+											var data = new FormData(form);
+
+											// If you want to add an extra field for the FormData
+											data
+													.append("CustomField",
+															"This is some extra data, testing");
+
+											// disabled the submit button
+											$("#btnSubmit").prop("disabled",
+													true);
+
+											$
+													.ajax({
+														type : "POST",
+														enctype : 'multipart/form-data',
+														processData : false,
+														contentType : false,
+														cache : false,
+														timeout : 600000,
+														url : "/artnook/uploadDetails",
+														data : data,
+														success : function(data) {
+															if (data === "Exist") {
+																$('#error3')
+																		.slideDown(
+																				"slow");
+															} else {
+																$('#error3')
+																		.slideUp(
+																				"slow");
+																$("#result")
+																		.append(
+																				"<ul><li style='word-wrap: break-word;'>https://artnookschools.s3.ap-south-1.amazonaws.com/"
+																						+ data
+																						+ "</li></ul>");
+																console
+																		.log("SUCCESS : ");
+															}
+															$("#btnSubmit")
+																	.prop(
+																			"disabled",
+																			false);
+
+														},
+														error : function(e) {
+
+															$("#result")
+																	.text(
+																			e.responseText);
+															console.log(
+																	"ERROR : ",
+																	e);
+															$("#btnSubmit")
+																	.prop(
+																			"disabled",
+																			false);
+
+														}
+													});
+
+										});
+
+					});
+</script>

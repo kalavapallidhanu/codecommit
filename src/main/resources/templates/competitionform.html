@@ -1,0 +1,253 @@
+
+
+<!-- <h3 class="pt-1">Competition Details</h3>
+
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="dashboard">Home</a></li>
+		<li class="breadcrumb-item">View Competition Details</li>
+		<li class="breadcrumb-item active" aria-current="page">Competition Details</li>
+	</ol>
+</nav> -->
+
+<div class="col-sm-12 post_msg starbg" id="competition_form_div">
+	
+	<form enctype="multipart/form-data" action=""
+		th:action="@{/artnook/saveCompetition}" th:object="${competition}"
+		method="post" class="formdetails" id="competition_form">
+
+
+		<div class="card">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-sm-6">
+					<div class="row">
+					
+					<div class="col-sm-12">
+						<div class="form-group">
+							<label for="email" >Art Description</label> <textarea class="form-control"
+								id="artDescription"
+								th:field="*{artDescription}"></textarea>
+						</div>
+						
+						</div>
+					
+					   <div class="col-sm-12">
+						<div class="form-group">
+							<label for="pwd" class="required_lbl">Upload Art</label> 
+							<input
+								id="fileName" type="hidden" class="form-control"
+								placeholder="Enter artUrl" th:field="*{fileName}">
+							 <input type="file" name=""  id="file" class="form-control" accept=".png,.jpg" required > 
+							<input id="inp_img" name="img" type="hidden" th:field="*{filebase64}">
+							<!-- <input
+								id="file-upload1" type="file" class="form-control"
+								placeholder="Enter artUrl" th:field="*{artUrl}" required> -->
+								
+								<div class="mt-3 p-2 text-center" style="border-radius:3px;border:5px dotted red; ">
+								<img id="previewHolder"  alt="Uploaded Image Preview Holder" 	/>
+								</div>
+						</div>
+					</div>
+					
+					</div>
+					</div>		
+					
+					<div class="col-sm-6">
+					   <img src="img/child2.jpg" class="h-100 w-100">
+					</div>	
+					
+					
+				</div>
+			</div>
+		</div>
+		
+		<div class=" mt-3 mb-3 p-2">
+		   <div class="text-center">
+		      <input type="submit" class="button btn btn-info comment_btn " value="Save">
+		   </div>
+		</div>
+		
+	</form>
+</div>
+
+
+
+<div class="modal fade" id="contactModal" tabindex="-1" role="dialog"
+	aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Message</h5>
+			</div>
+			<div class="modal-body">Your Information Save Successfully,
+				Thank You!!</div>
+			<div class="modal-footer">
+				<button class="btn btn-primary" type="button" id="closeButton"
+					data-dismiss="modal">Close</button>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+
+
+function fileChange(e) { 
+    document.getElementById('inp_img').value = '';
+    
+    var file = e.target.files[0];
+
+    if (file.type == "image/jpeg" || file.type == "image/png") {
+    	if(this.files[0].size > 1000000){
+       var reader = new FileReader();  
+       reader.onload = function(readerEvent) {
+  
+          var image = new Image();
+          image.onload = function(imageEvent) {    
+             var max_size = 500;
+             var w = image.width;
+             var h = image.height;
+            
+             if (w > h) {  if (w > max_size) { h*=max_size/w; w=max_size; }
+             } else     {  if (h > max_size) { w*=max_size/h; h=max_size; } }
+            
+             var canvas = document.createElement('canvas');
+             canvas.width = w;
+             canvas.height = h;
+             canvas.getContext('2d').drawImage(image, 0, 0, w, h);
+                
+             if (file.type == "image/jpeg") {
+                var dataURL = canvas.toDataURL("image/jpeg", 1.0);
+             } else {
+                var dataURL = canvas.toDataURL("image/png");   
+             }
+             document.getElementById('inp_img').value = dataURL;  
+             document.getElementById('fileName').value = e.target.files[0].name;  
+          }
+          image.src = readerEvent.target.result;
+       }
+       reader.readAsDataURL(file);
+    	}
+    	else{
+    		var reader = new FileReader();
+    	    // Read file content on file loaded event
+    	    reader.onload = function() {
+    	      document.getElementById('inp_img').value = reader.result;  
+              document.getElementById('fileName').value = e.target.files[0].name;  
+    	    };
+    	    
+    	    // Convert data to base64 
+    	    reader.readAsDataURL(file);
+    		
+    	}
+    } else {
+       document.getElementById('file').value = ''; 
+       $('.modal-body').html('Please only select images in JPG- or PNG-format.'); 
+       $('#contactModal').modal('show');
+    }
+ }
+
+ document.getElementById('file').addEventListener('change', fileChange, false);
+
+	
+function fasterPreview( uploader ) {
+    if ( uploader.files && uploader.files[0] ){
+          $('#profileImage').attr('src', 
+             window.URL.createObjectURL(uploader.files[0]) );
+    }
+}
+
+$("#file").change(function() {
+	
+	
+	readURL(this);
+	var ext = $('#file').val().split('.').pop().toLowerCase();
+     if(this.files[0].size > 5000000){
+        $('.modal-body').html('File too large.Maximum file size should 5 MB')
+    	$('#contactModal').modal('show');
+    	   this.value = "";
+    	   return;
+    }
+    else if($.inArray(ext, ['png','jpg','jpeg','JPG']) == -1) {
+        $('.modal-body').html('Invalid File Type.')
+    	$('#contactModal').modal('show');
+         this.value = "";
+         return;
+    }
+    else {
+    	fasterPreview(this);
+    }
+});
+	
+	
+	//Ajax call to Save form details
+    $('#competition_form').on('submit',(function(e) {
+        e.preventDefault();
+       var form = $('#competition_form')[0];
+       
+	        var formData = new FormData(form);
+	       
+        $.ajax({
+            type:'POST',
+            url: $(this).attr('action'),
+            data:formData,
+            enctype : 'multipart/form-data',
+            cache:false,
+            contentType: false,
+            processData: false,
+            success:function(data){
+            	
+            	//clear form data after form submit and once details  are saved and open Modal to show appropriate msg
+            	
+            	//$("input,select").val("");
+         
+            	$('.modal-body').html('Competition Details Save successfully, Thank you.')
+            	$('#contactModal').modal('show');
+            	  
+            	$("#closeButton").click(function(){
+                	
+            	
+            
+            		 $.ajax({
+			              url : "/artnook/newCompetition",
+			              async : true,
+			              success : function(data) {
+			            	  $('div').removeClass('modal-backdrop fade show');
+			                   $('.container-fluid').html(data);
+			              }
+			            });
+           		}); 
+           
+           },
+           error: function(data){
+           	//window.location.href=window.location.origin + '/artnook/newContact';
+        
+           	$('.modal-body').html('Competition Details Save successfully, Thank you.')
+           	$('#contactModal').modal('show');
+            
+           }
+        });
+	        
+	       
+    }));
+	
+	
+    function readURL(input) {
+    	  if (input.files && input.files[0]) {
+    	    var reader = new FileReader();
+    	    reader.onload = function(e) {
+    	      $('#previewHolder').attr('src', e.target.result);
+    	    }
+    	    reader.readAsDataURL(input.files[0]);
+    	  } else {
+    	    alert('select a file to see preview');
+    	    $('#previewHolder').attr('src', '');
+    	  }
+    	}
+
+    	
+</script>
+

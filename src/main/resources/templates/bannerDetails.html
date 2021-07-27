@@ -1,0 +1,36 @@
+<ol class="carousel-indicators carousel-indicators-fall">
+               <th:block th:each="banner,stat:${banners}" >
+                     <li data-target="#carouselExampleIndicators" th:data-slide-to="${stat.index}" th:if="${stat.index==0}" class="active"  ></li>
+                     <li data-target="#carouselExampleIndicators" th:data-slide-to="${stat.index}" th:if="${stat.index!=0}" ></li>
+                </th:block>
+              </ol>
+              <div class="carousel-inner">
+                <th:block th:each="banner,stat:${banners}" >
+                  <div class="carousel-item active" th:if="${stat.index==0}">
+                   
+                      <!--   <img th:if="${!#strings.isEmpty(banner.mobileImage)}" th:src="${banner.mobileImage}" class="mobile_banner">       -->
+                        <img th:if="${!#strings.isEmpty(banner.webImage)}" th:id="${banner.webImage}" th:src="${banner.webImage}"class="d-block img-fluid">  
+                      
+                  </div>
+                                                      
+                  <div class="carousel-item" th:if="${stat.index!=0}">
+                   
+                        <!--  <img th:if="${!#strings.isEmpty(banner.mobileImage)}" th:src="${banner.mobileImage}" class="mobile_banner">       -->
+                        <img th:if="${!#strings.isEmpty(banner.webImage)}" th:id="${banner.webImage}" th:src="${banner.webImage}" class="d-block img-fluid">  
+                    
+                  </div>
+                </th:block> 
+              </div>
+             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+	               <span class="carousel-control-prev-icon" aria-hidden="true">
+							<i class='fas fa-angle-left' style='font-size:28px;color:#ff7f27'></i>
+               </span>
+               <span class="sr-only">Previous</span>
+             </a>
+             <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+               <span class="carousel-control-next-icon" aria-hidden="true">
+					                 
+							<i class='fas fa-angle-right' style='font-size:28px;color:#ff7f27'></i>
+               </span>
+               <span class="sr-only">Next</span>
+             </a>

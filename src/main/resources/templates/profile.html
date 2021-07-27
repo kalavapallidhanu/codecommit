@@ -1,0 +1,272 @@
+
+
+
+
+<h3 class="pt-1">Profile</h3>
+
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="dashboard">Home</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Profile </li>
+	</ol>
+</nav>
+
+
+<div class="row mt-3">
+	<!-- slider 1  -->
+	<div class="col-xl-12 col-lg-11">
+		<div class="card shadow mb-4">
+			<!-- Card Header - Dropdown -->
+			<div
+				class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+				<h6 class="m-0 font-weight-bold text-primary">Profile Details</h6>
+			</div>
+			<!-- Card Body -->
+			<div class="card-body profileinfo"  id="info" >
+                <div class="">
+            <div class="">
+               <form  th:if="${profile!=null}" enctype="multipart/form-data"  th:action="@{save}" action="" th:object="${profile}"  method="post" id="edit_form">
+                  <div class="row">
+                     <div class="col-sm-12 text-center">
+                        <div class="profile_picture">
+                           <img th:src="${profile.image}" id="profileImage" width="100" height="100" />
+                           <!--    <span id="errorMessage" style="display:none;">File Size too large</span> -->
+                           <label class="change_image">
+                           <input type="file" name=""  id="file" th:field="*{file}" class="int_profile" accept=".png,.jpg"> 
+                           <span><img src="/artnook/icons/edit.png">Change Image</span> 
+                           </label>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-sm-6">
+                        <div class="form-group">
+                           <label for="email">ID</label>
+                           <input type="email" class="form-control" placeholder="" th:field="*{id}"  readonly="" name="" th:value=" ${profile.id}">
+                        </div>
+                     </div>
+                     <div class="col-sm-6">
+                        <div class="form-group">
+                           <label for="pwd">First Name</label>
+                           <input type="text" class="form-control edit_on_btb"   readonly id="pwd" placeholder=""  name=""  th:value=" ${profile.firstName}">
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-sm-6">
+                        <div class="form-group">
+                           <label for="email">Middle Name</label>
+                           <input type="text" class="form-control edit_on_btb"  readonly id="email"  placeholder="" name="" th:value=" ${profile.middleName}">
+                        </div>
+                     </div>
+                     <div class="col-sm-6">
+                        <div class="form-group">
+                           <label for="email">Last Name</label>
+                           <input type="text" class="form-control edit_on_btb"  readonly id="email"  placeholder="" name="" th:value=" ${profile.lastName}">
+                        </div>
+                     </div>
+                     
+                  </div>
+                  <div class="row">
+                  <div class="col-sm-6 ">
+                        <div class="form-group">
+                           <label for="pwd">Class</label>
+                           <input type="text" class="form-control" id="pwd"  readonly="" th:value=" ${profile.className}">
+                        </div>
+                     </div>
+                     <div class="col-sm-6 ">
+                        <div class="form-group">
+                           <label for="pwd">Division</label>
+                           <input type="text" class="form-control" readonly=""  id="pwd" placeholder="" name=""
+                              th:value=" ${profile.divisionName}">
+                        </div>
+                     </div>
+                     
+                    
+                     </div>
+                     
+                 
+                  <div class="row">
+                   <div class="col-sm-6 ">
+                        <div class="form-group">
+                           <label for="pwd">Branch</label>
+                           <input type="text" class="form-control" readonly=""  id="pwd" placeholder="" name=""
+                              th:value=" ${profile.branch}">
+                        </div>
+                     </div>
+                     <div class="col-sm-6">
+                        <div class="form-group">
+                           <label for="email">Blood Group</label>
+                           <input type="email" class="form-control"  readonly="" id="email" placeholder="" name="" 
+                              th:value=" ${profile.bloodGroup}">
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row">
+                  
+                     <div class="col-sm-6 ">
+                        <div class="form-group">
+                           <label for="pwd">Email</label>
+                           <input type="text" class="form-control" id="pwd" placeholder="" name="" readonly="" th:value=" ${profile.email}">
+                        </div>
+                     </div>
+                     <div class="col-sm-6 ">
+                        <div class="form-group">
+                           <label for="pwd">Mobile Number</label>
+                           <input type="text" class="form-control" id="pwd" placeholder="" th:field="*{mobileNo}" name="" th:value=" ${profile.mobileNo}">
+                        </div>
+                     </div>
+                     
+                  </div>
+                 
+                     
+                  <div class="row">
+                     <div class="col-sm-12">
+                        <div class="form-group button_groups text-center"> 
+                           <button  class="btn btn-primary btn_save">Update</button>
+                        </div>
+                     </div>
+                  </div>
+               </form>
+            </div>
+            <div id="others" class="tab-pane fade">
+               <h3>Others</h3>
+            </div>
+         </div>           
+
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="cards">
+   </div>
+
+<!-- Logout Modal-->
+<div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Message</h5>
+         </div>
+         <div class="modal-body">Your Information Updated Successfully, Thank You!!</div>
+         <div class="modal-footer">
+            <button class="btn btn-primary" type="button" id="closeButton"  data-dismiss="modal">Close</button>
+         </div>
+      </div>
+   </div>
+</div>
+<script>
+   $(document).ready(function(){
+   	getProfileViewAll();
+   });
+   function getProfileViewAll() {
+       $.ajax({
+     url : "/artnook/profileView",
+     async : true,
+     success : function(data) {
+       
+          $('#profileViewAll').html(data);
+     }
+   });
+   }
+   function fasterPreview( uploader ) {
+       if ( uploader.files && uploader.files[0] ){
+             $('#profileImage').attr('src', 
+                window.URL.createObjectURL(uploader.files[0]) );
+       }
+   }
+   
+   var uploadField = document.getElementById("file");
+   
+   uploadField.onchange = function() {
+   	var ext = $('#file').val().split('.').pop().toLowerCase();
+       if(this.files[0].size > 500000){
+           $('.modal-body').html('File too large.Maximum file size should 500 kb')
+       	$('#profileModal').modal('show');
+       	   this.value = "";
+       	   return;
+        /*  document.getElementById("errorMessage").style.display = "block";
+          this.errorMessage = ""; */
+       }
+       else if($.inArray(ext, ['png','jpg','jpeg','JPG']) == -1) {
+           $('.modal-body').html('Invalid File Type.')
+       	$('#profileModal').modal('show');
+            this.value = "";
+            return;
+       }
+       else {
+       	fasterPreview(this);
+       }
+   };
+   
+   	 $("li#save_btb").click(function() {
+   	       $("#edit_form").submit();
+   	    });
+   	
+   	 $('#edit_form').on('submit',(function(e) {
+   	        e.preventDefault();
+   	        var formData = new FormData(this);
+   
+   	        $.ajax({
+   	            type:'POST',
+   	            url: $(this).attr('action'),
+   	            data:formData,
+   	            cache:false,
+   	            contentType: false,
+   	            processData: false,
+   	            success:function(data){
+   	            	$('#sm-profile-picture').attr('src',$('#profileImage').attr('src'));
+   	            	//$('#main-container').html(data);
+   	            	$('.modal-body').html('Your profile updated successfully, thank you.')
+   	            	$('#profileModal').modal('show');
+   	            	$("#closeButton").click(function(){
+   		            	
+   		               //	window.location.href=window.location.origin + '/';
+   	            		$.ajax({
+   	  		              url : "/artnook/profileView",
+   	  		              async : true,
+   	  		              success : function(data) {
+   	  		            	  $('div').removeClass('modal-backdrop fade show');
+   	  		            	$('.container-fluid').html(data);
+   	  		              }
+   	  		            });
+               		}); 
+   	            	
+   	            },
+   	            error: function(data){
+   	            	$('.modal-body').html('Unable to update profile, Please try later.')
+   	            	$('#profileModal').modal('show');
+   	                console.log(data);
+   	            }
+   	        });
+   	    }));
+   	 
+   	 if($("#userGroupName").val()!='')
+    	{
+    	$("#userGroupName").attr('disabled', true);
+    	}
+    
+    
+    
+    if($("#emailId").val()!="")
+   	{
+   	$("#emailId").attr('readonly', true);
+   	
+   	}
+   	
+   	
+</script>

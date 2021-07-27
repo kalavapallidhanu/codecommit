@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+
+	.sectionTitle{
+		font-size:1.7rem;
+		margin-bottom:0.5rem;
+	}
+	.headings_date,.read_more_txt{
+		color:black;
+	}
+	.card-header{
+		  background-image: linear-gradient(90deg, #403e3e 2%  , #ff890c 100%);
+	}
+	.card-header h6{
+		color:white !important;
+		font-weight:700 !important;
+	}
+	
+	#content{
+		padding-top:10px !important;
+	}
+	#content .container-fluid{
+		padding-top:0px !important;
+	}
+	.carousel-item .img-fluid{
+	  width: 100%;
+	  height:100%;/* 
+	  height:-moz-available  !important;
+	  height: -webkit-fill-available !important;
+	  height: stretch  !important;
+	  min-width: -moz-available  !important;          
+	  min-width: -webkit-fill-available !important; 
+	  width: stretch  !important; */
+	  margin-top:0px !important;
+	} 
+	
+	#carouselExampleIndicators .carousel-item img{
+	height:100% !important;
+	margin:0px !important;
+	}
+	#carouselExampleIndicators{
+		padding:0px !important;
+		max-height: 310px;
+		min-height: 310px;
+	}
+	.dashbordMain .read_more_txt{
+		bottom:-28px !important;
+	}
+	
+	@media(max-width:768px){
+		.sectionTitle{
+			font-size:1.25rem;
+		}
+	}
+</style>
+<th:block layout:replace="fragments/htmlhead"></th:block>
+<body id="page-top">
+	<!--Main Header -->
+	<th:block layout:replace="fragments/header"></th:block>
+	<!--Page Wrapper -->
+	<div id="wrapper">
+		<!-- Side Bar -->
+		<th:block layout:replace="fragments/sidebar_menu"></th:block>
+
+
+		<!-- Content Wrapper -->
+		<div id="content-wrapper" style="background:white;min-height:500px" class="d-flex flex-column dashbordMain" >
+			<!-- Main Content -->
+			<div id="content">
+				<!-- Begin Page Content -->
+				<div class="container-fluid">
+					<!-- Content Row -->
+					<div class="row">
+						<div class="col-xl-12">
+							<!-- Example Default -->
+							<div class="example-wrap m-lg-0">
+								<div class="example">
+									<div id="carouselExampleIndicators" class="carousel slide"
+										data-ride="carousel">
+										<img alt="" class="lodingGIf mainloadign"
+											src="/artnook/img/loading.gif">
+									</div>
+								</div>
+							</div>
+							<!-- End Example Default -->
+						</div>
+					</div>
+					<!-- Content Row -->
+					<div class="row mt-3" >
+						<!-- slider 1 -->
+						<div class="col-xl-8 col-lg-8">
+							<div class="card shadow mb-4">
+								<!-- Card Header - Dropdown -->
+								<div
+									class="card-header header-gradient py-3 d-flex flex-row align-items-center justify-content-between">
+									<h6 class="m-0 font-weight-bold text-primary text-uppercase">
+										WorkBox</h6>
+								</div>
+								<!-- Card Body -->
+								<div class="card-body">
+									<div class="example">
+										<div id="Slider_on_widgets_section3"
+											class="carousel slide Slider_on_widget" data-ride="carousel"
+											data-interval="false">
+											<img alt="" class="lodingGIf"
+											src="/artnook/img/loading.gif">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<!-- slider 2 -->
+						<div class="col-xl-4 col-lg-4">
+							<div class="card shadow mb-4">
+								<!-- Card Header - Dropdown -->
+								<div
+									class="card-header header-gradient py-3 d-flex flex-row align-items-center justify-content-between">
+									<h6 class="m-0 font-weight-bold text-primary text-uppercase"> Art buzz</h6>
+								</div>
+								<!-- Card Body -->
+								<div class="card-body">
+									<div id="Slider_on_widgets_section2"
+										class="carousel slide Slider_on_widget" data-ride="carousel"
+										data-interval="false">
+										<img alt="" class="lodingGIf"
+											src="/artnook/img/loading.gif">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row mt-3">
+						<!-- slider 1 -->
+						<div class="col-xl-8 col-lg-8">
+							<div class="card shadow mb-4">
+								<!-- Card Header - Dropdown -->
+								<div
+									class="card-header header-gradient py-3 d-flex flex-row align-items-center justify-content-between">
+									<h6 class="m-0 font-weight-bold text-primary text-uppercase">
+										Art-a-tainment</h6>
+								</div>
+								<!-- Card Body -->
+								<div class="card-body">
+									<div class="example">
+										<div id="Slider_on_widgets_section1"
+											class="carousel slide Slider_on_widget" data-ride="carousel"
+											data-interval="false">
+											<img alt="" class="lodingGIf"
+											src="/artnook/img/loading.gif">
+										</div>
+									</div>
+								</div>
+								
+							</div>
+						</div>
+						<!-- slider 2 -->
+						<div class="col-xl-4 col-lg-4">
+							<div class="card shadow mb-4">
+								<!-- Card Header - Dropdown -->
+								<div
+									class="card-header header-gradient py-3 d-flex flex-row align-items-center justify-content-between">
+									<h6 class="m-0 font-weight-bold text-primary text-uppercase">Artnook spotlight</h6>
+								</div>
+								<!-- Card Body -->
+								<div class="card-body">
+									<div id="Slider_on_widgets_section4"
+										class="carousel slide Slider_on_widget" data-ride="carousel"
+										data-interval="false">
+										<img alt="" class="lodingGIf"
+											src="/artnook/img/loading.gif">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- /.container-fluid -->
+				</div>
+
+
+			</div>
+			<!-- End of Main Content -->
+
+		</div>
+
+
+		<!-- End of Page Wrapper -->
+	</div>
+
+	<th:block layout:replace="fragments/footer"></th:block>
+	<!-- Scroll to Top Button-->
+	<a class="scroll-to-top rounded" href="#page-top"> <i
+		class="fas fa-angle-up"></i>
+	</a>
+
+
+	<script>
+		$(document).ready(function() {
+			getBannerDetails();
+			getSection1();
+			getSection2();
+			getSection3();
+			getSection4();
+
+		});
+
+		function getBannerDetails() {
+			$.ajax({
+				url : "/artnook/bannerDetails",
+				async : true,
+				success : function(data) {
+
+					$('#carouselExampleIndicators').html(data);
+				}
+			});
+		}
+		function getSection1() {
+
+			$.ajax({
+				url : "/artnook/section1Details",
+				async : true,
+				success : function(data) {
+					$('#Slider_on_widgets_section1').html(data);
+				}
+			});
+		}
+		function getSection2() {
+
+			$.ajax({
+				url : "/artnook/section2Details",
+				async : true,
+				success : function(data) {
+					$('#Slider_on_widgets_section2').html(data);
+				}
+			});
+		}
+		function getSection3() {
+
+			$.ajax({
+				url : "/artnook/section3Details",
+				async : true,
+				success : function(data) {
+					$('#Slider_on_widgets_section3').html(data);
+				}
+			});
+		}
+		function getSection4() {
+
+			$.ajax({
+				url : "/artnook/section4Details",
+				async : true,
+				success : function(data) {
+					$('#Slider_on_widgets_section4').html(data);
+				}
+			});
+		}
+	</script>
+</body>
+</html>

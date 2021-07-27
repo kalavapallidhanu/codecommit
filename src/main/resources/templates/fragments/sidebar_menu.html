@@ -1,0 +1,331 @@
+<style>
+	#wrapper{
+		top:70px;
+	}
+	.sidebar-brand-icon img{
+		width:55%;
+	}
+	
+	.toggled{
+		display:flex !important;
+	}
+	.nav-link:hover{
+		transform:scale(1.1)
+	}
+
+	.nav-link{
+		font-size:1.5rem;
+		align-items:center;
+		display:flex;
+	}
+	*{
+		transition: all 0.3s;
+	}
+	.onExpand{
+		padding-left: 25px;
+		font-size: 18px;
+		transition:display 0.5s;	
+	}
+	
+ 	.onExpand{ 
+ 		display:none ;
+ 	} 
+ 	
+	.container-fluid{
+		padding:10px;
+		
+	}
+	@media(min-width:768px){
+		
+		.container-fluid{
+			padding-left:6rem;	
+		}
+		
+		
+	}
+	
+	@media(max-width:766px){
+		.di{
+			width:0px !important;
+		}
+		.toggled{
+			
+			width:250px !important;
+			transition: width .5s;
+		}
+		
+		.onExpand{ 
+ 		display:inline ;
+ 	} 
+	}
+	
+	.sidebarr{
+		z-index:100;
+		width:82px;
+		height: 100vh;
+		padding-top:40px; 
+/* 		margin-top:35px; */
+		position: fixed;
+		overflow:hidden; 
+		
+  		/*background-image: linear-gradient(180deg, #0e4155 2%, #0e4155 100%);*/
+  		background-size: cover;
+		transition: width .5s;
+	}
+	.gradient{
+		background-image: linear-gradient(180deg, #403e3e 2% , #ff890c 100%);
+	}
+	.header-gradient{
+		background-image: linear-gradient(90deg, #403e3e 2% , #ff890c 100%) !important;
+	}
+	.sidebarr:hover{
+		width:250px;
+	}
+ 	.sidebarr:hover .sidebarr-nav-item .onExpand{ 
+ 	display:inline !important; 
+ 	} 
+	
+	
+	.sidebarr-nav{
+		list-style:none;
+		padding:0;
+		margin: 0;
+		display:flex;
+		flex-direction: column;
+		align-items:center;
+		height:100vh; 
+	}
+	
+	
+	
+	.sidebarr-nav-item{
+		width:100%;
+		
+	}
+	
+	.sidebarr-nav-link{
+		display:flex;
+		align-items:center;
+		text-decoration:none; 
+		color:white;
+	}
+	
+	.sidebarr-nav-link:hover{
+		color:white;
+		text-decoration:none;
+		font-size:1.1rem;
+	}
+	
+	
+	.sidebarr-nav-link i{
+		font-size:1.5rem;
+		position: absolute;
+		left:50%;
+		top:50%;
+		transform:translate(-50% , -50%);
+	}
+	
+	.sidebarr-nav-link div{
+		min-width:82px;
+		height: 50px;
+		position: relative;
+	}
+	
+	.sidebarr-expand .sidebarr{
+		width:250px;
+	}
+	
+	.collapse-item{
+		margin:0 0 0 10px ;
+		color:black;
+	}
+	
+	.icon{
+	
+	margin-left:25px;font-size:1.5rem
+	}
+	
+</style>
+<!-- Sidebar -->
+
+<ul class="navbar-nav  gradient sidebarr sidebar-dark di accordion sidebarr-nav" id="accordionSidebar">
+   <!-- Sidebar - Brand -->
+   <!-- Divider -->
+<!--    <hr class="sidebar-divider my-0"> -->
+   <!-- Nav Item - Dashboard -->
+   <li class="sidebarr-nav-item nav-item active">
+      <a class="d-flex nav-link" href="dashboard">
+		<div class="icon" >
+      <i class="fas fa-fw fa-home" ></i>
+      </div>
+      <span class="onExpand">Home</span></a>
+   </li>
+   <!-- Divider -->
+<!--    <hr class="sidebar-divider"> -->
+   <!-- Heading -->
+   <!-- Nav Item - Pages Collapse Menu -->
+   <li class=" sidebarr-nav-item nav-item" id="ad" th:if="${session.user.userGroup=='root'}">
+      <a class=" d-flex nav-link collapsed" id="ad" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+      <div class="icon " id="ad" >
+      <i class="fas fa-fw fa-cog"></i>
+      </div>
+      <span class="onExpand " id="ad">Root Admin</span>
+      </a>
+      <div id="collapseTwo" class="collapse px-3" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+         <div class="bg-white py-2 collapse-inner rounded">
+            <div>
+               <a href="javascript:void(0)"  class="collapse-item artnook-link" th:id="|/artnook/viewAllContact|"
+                  >Create User</a>
+            </div>
+            
+         </div>
+      </div>
+   </li>
+   
+      
+   <!-- Nav Item - Pages Collapse Menu -->
+    <li class="sidebarr-nav-item nav-item" th:if="${session.user.userGroup=='admin'}">  
+   <!--   <li class="nav-item">  -->
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#article" aria-expanded="true" aria-controls="collapseTwo">
+      <div class="icon" >
+      <i class="fas fa-fw fa-cog"></i>
+      </div>
+      <span class="onExpand">Article Admin</span>
+      </a>
+      <div id="article" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+         <div class="bg-white py-2 collapse-inner rounded">
+            <div>
+               <a href="javascript:void(0)"  class="collapse-item artnook-link" th:id="|/artnook/article|">Create Article</a>
+            </div>
+         </div>
+      </div>
+   </li>
+   
+   
+   
+   <li class="nav-item sidebarr-nav-item" th:if="${session.user.userGroup=='users'}">
+    <a href="javascript:void(0)"  class="nav-link artnook-link" th:id="|/artnook/viewAllCompetition|"
+                  >
+      <div class="icon" >
+<!--       <i class="fas fa-fw fa-bullhorn"></i> -->
+      <img src="/artnook/icons/competition2.png" width="25">
+      </div>
+      <span class="onExpand">Competition</span></a>
+   </li>
+   
+    <li class="nav-item sidebarr-nav-item" th:if="${session.user.userGroup=='root'}">
+    <a href="javascript:void(0)"  class="nav-link artnook-link" th:id="|/artnook/viewAllEventDetails|"
+                  >
+      <div class="icon" style="margin-left:28px">
+      <i class="fas fa-info-circle"></i>
+      </div>
+      <span  class="onExpand">Event Details</span></a>
+   </li>
+   
+   <li class="nav-item sidebarr-nav-item" th:if="${session.user.userGroup=='root'}">
+    <a href="javascript:void(0)"  class="nav-link artnook-link" th:id="|/artnook/viewAllCompetitionAdmin|"
+                  >
+      <div class="icon" style="margin-left:30px">
+<!--       <i class="fas fa-clipboard-list" style="font-size:1.7rem"></i> -->
+      <img src="/artnook/icons/competition2.png" width="25">
+      </div>
+      <span class="onExpand" style="padding-left:28px;">Competition</span></a>
+   </li>
+   <li class="nav-item sidebarr-nav-item">
+      <a  href="javascript:void(0)" id="/artnook/sec1-read/0" class="nav-link artnook-link" >
+      <div class="icon" style="margin-left:26px">
+<!--       <i class="fas fa-book-open"></i> -->
+      <img src="/artnook/icons/creativity.png" width="25">
+      </div>
+      <span class="onExpand" style="padding-left:28px;">Art-a-tainment</span></a>
+   </li>
+   <li class="nav-item sidebarr-nav-item">
+      <a  href="javascript:void(0)" id="/artnook/sec2-read/0" class="nav-link artnook-link" >
+      <div class="icon" >
+<!--       <i class="fas fa-fw fa-bullhorn"></i> -->
+      <img src="/artnook/icons/artbuzz.png" width="25">
+      </div>
+      <span  class="onExpand">Art buzz</span></a>
+   </li>
+    <li class="nav-item sidebarr-nav-item">
+      <a  href="javascript:void(0)" id="/artnook/sec3-read/0" class="nav-link artnook-link" >
+      <div class="icon" style="margin-left:23px">
+<!--      <i class="far fa-calendar-alt"></i> -->
+    
+	 <img src="/artnook/icons/workbox.png" width="25">
+      
+      </div>
+      <span class="onExpand" style="padding-left:30px;">WorkBox</span></a>
+   </li>
+   <li class="nav-item sidebarr-nav-item">
+      <a  href="javascript:void(0)" id="/artnook/sec4-read/0" class="nav-link artnook-link" >
+      <div class="icon" >
+<!--       <i class="fas fa-trophy"></i>  -->
+      <img src="/artnook/icons/topReader.png" width="25">
+      </div>
+      <span class="onExpand">Artnook spotlight</span></a>
+   </li>
+</ul>
+
+<script>
+
+//.sidebar.toggled
+
+
+ $(document).on('click', '#content-wrapper', function(e) {
+	
+		    if ($(".sidebar").hasClass("toggled")) {
+		      $('.sidebar .collapse').collapse('hide');
+		    }
+		    
+		    $(".sidebar").removeClass("toggled");
+		   
+		  });
+//});
+
+$('[data-toggle="collapse"]').on('click', function() {
+	
+	    $(this).parents('.nav-item').find('.collapse').collapse('show');
+	});
+	
+/* $('[data-toggle="collapse"]').on('mouseleave', function() {
+	
+    $(this).parents('.nav-item').find('.collapse').collapse('hide');
+}); */
+	
+	$('.sidebarr').on('mouseleave',function(){
+		let a=document.getElementsByClassName('collapse');
+		for(let i=0;i<a.length;i++){
+			a[i].classList.remove('show');
+		}
+	})
+	
+  
+  
+   $('body').on('click', '.artnook-link', function(e) {
+   	e.preventDefault();
+   
+   	var url = this.id;
+   			
+   	$.ajax({
+         url : url,
+         async : true,
+         success : function(data) {
+        	 if(data.indexOf("Login to Your Artnook Account")!=-1){
+        		 window.top.location.href='/artnook/login';}
+        	 else{
+   	      $('.container-fluid').html(data);
+        	 }
+         }
+   	
+      });
+   });
+   
+$('body,html').click(function(e){
+	
+	if(e.target!=document.getElementById('sidebarToggleTop') && e.target!=document.getElementById('bars') && e.target.id!='ad')
+	   $('.sidebarr').removeClass('toggled');
+		
+	});
+   
+</script>

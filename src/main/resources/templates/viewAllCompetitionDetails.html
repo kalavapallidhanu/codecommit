@@ -1,0 +1,114 @@
+
+<!-- <h3 class="pt-1">Competition Details</h3>
+
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="dashboard">Home</a></li>
+		<li class="breadcrumb-item active" aria-current="page">View Competition Details</li>
+	</ol>
+</nav> -->
+
+          
+<div id="allArticle">
+   
+    <div class="py-2 ">
+            
+               <a  href="javascript:void(0)" class="artnook-link linkbtn newCompetition"
+      th:id="|/artnook/newCompetition|">Participate to competition</a>
+           
+         </div>
+        
+<div class="pt-2 table-responsive-sm">
+   <table id="todotable" class="table table-striped table-bordered"
+      style="width: 100%">
+      <thead>
+         <tr>
+            <th>ID</th>
+            <th>Art</th>
+            <th>Art Description</th>
+             <th>Event Name</th>
+         </tr>
+      </thead>
+   </table>
+   </div>
+</div>
+
+   <!-- image preview Modal-->
+  <div class="modal fade w-100" id="imgPreview" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <!-- <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"></h5>
+        </div> -->
+        <div class="modal-body ">
+             <div id="imageShow" class="p-4 text-center">
+               <img src="" class="w-75">
+             </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" type="button" id="closeButton"  data-dismiss="modal">Close</button>
+         
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+           
+
+   
+   
+  
+<script>
+
+   $(document).ready( function () {
+	   
+	   $.ajax({ url: "/artnook/checkCompetitionStatus",
+	        success: function(data){
+	           if(data==0){
+	        	   $(".newCompetition").hide();
+	           }
+	        }});
+	   var i = 1;
+	   
+		   var urlData="/artnook/getCompetitionData";
+		   var table = $('#todotable').DataTable({
+	   			"sAjaxSource": urlData,
+	   			"sAjaxDataProp": "",
+	   			"pageLength": 25,
+	   		     "columns": [ 
+	   		    	{
+	   		         "render": function(data, type, full, meta) {
+	   		           return i++;
+	   		         }
+	   		       }, 
+	   				
+	   				{ 
+	   		    	   "data": "artUrl",
+   		            "render": function(data) {
+   
+   		                return '<span class="imgthumbnail">'+data+'</span>';
+   		            }   
+	   				},
+	   				{ "data": "artDescription"},
+	   				{ "data": "eventdetails.eventName"}
+	   				
+	   			   
+	   			],
+	   			
+	                  destroy: true
+	   		 });
+	   
+		  
+
+		   
+		   $('#todotable').on('click', 'tbody .imgthumbnail', function () {
+			     var $url = $(this).find('img').attr('src'); 
+		        $("#imgPreview").modal('show');
+		        $('#imageShow').find('img').attr("src" ,  $url);
+		   });
+   	            
+       
+   });	
+   
+</script>
