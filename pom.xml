@@ -13,7 +13,7 @@
 	<artifactId>artnook</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>artnook</name>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<description>Artnook School</description>
 
 	<properties>
